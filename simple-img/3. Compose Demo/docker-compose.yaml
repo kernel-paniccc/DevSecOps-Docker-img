@@ -1,0 +1,23 @@
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - 8080:80
+    volumes:
+      - ./nginx.conf:/user/share/nginx/html/nginx.conf
+    
+  webapp:
+    build:
+      context: app
+      dockerfile: Dockerfile
+
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_PASSWD=secpass
+      - POSTGRES_USERNAME=postgres
+      - POSTGRES_DB=DB_name
+    ports:
+      - 5432:5432
+ 
+    
