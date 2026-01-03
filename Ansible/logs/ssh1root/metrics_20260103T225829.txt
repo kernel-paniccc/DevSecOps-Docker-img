@@ -1,0 +1,22 @@
+=== Uptime and load ===
+ 22:58:30 up 58 min,  0 users,  load average: 2.03, 1.96, 1.93
+
+=== Memory ===
+               total        used        free      shared  buff/cache   available
+Mem:            7.7G        3.8G        281M        1.2G        3.6G        2.3G
+Swap:           976M        190M        786M
+
+=== Disk ===
+Filesystem      Size  Used Avail Use% Mounted on
+overlay         438G  261G  155G  63% /
+/dev/sda2       438G  261G  155G  63% /etc/hosts
+
+=== Listening sockets ===
+Netid State  Recv-Q Send-Q Local Address:Port  Peer Address:PortProcess
+udp   UNCONN 0      0         127.0.0.11:57308      0.0.0.0:*          
+tcp   LISTEN 0      4096      127.0.0.11:41327      0.0.0.0:*          
+tcp   LISTEN 0      128          0.0.0.0:22         0.0.0.0:*          
+tcp   LISTEN 0      128             [::]:22            [::]:*          
+
+=== Top processes (CPU sorted) ===
+    PID COMMAND         %CPU %MEM\n    532 sshd             2.0  0.1\n      1 sshd             0.0  0.1\n     23 sshd             0.0  0.1\n     34 bash             0.0  0.0\n    679 sh               0.0  0.0\n    680 python3.10       0.0  0.3\n    681 ps               0.0  0.0
