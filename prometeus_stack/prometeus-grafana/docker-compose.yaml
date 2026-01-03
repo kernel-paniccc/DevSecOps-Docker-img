@@ -13,12 +13,21 @@ services:
       - '--web.enable-lifecycle'
     ports:
       - 9090:9090
+    networks:
+      - monitoring
 
  grafana:
     image: grafana/grafana-enterprise
     restart: unless-stopped
     ports:
       - '3000:3000'
+    networks:
+      - monitoring
 
 volumes:
   prometheus_data:
+
+networks:
+  monitoring:
+    name: monitoring
+    external: true
