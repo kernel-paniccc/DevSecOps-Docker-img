@@ -1,0 +1,47 @@
+Host ssh1
+    HostName 127.0.0.1
+    User ansible
+    IdentityFile /home/kali/Projects-git/DevSecOps-Docker-img/Ansible/Hosts/keys/id_ed25519_ansible
+    IdentitiesOnly yes
+    PreferredAuthentications publickey
+    Port 2222
+
+Host ssh2
+    HostName 127.0.0.1
+    User ansible
+    IdentityFile /home/kali/Projects-git/DevSecOps-Docker-img/Ansible/Hosts/keys/id_ed25519_ansible
+    IdentitiesOnly yes
+    PreferredAuthentications publickey
+    Port 2223
+
+Host ssh3
+    HostName 127.0.0.1
+    User ansible
+    IdentityFile /home/kali/Projects-git/DevSecOps-Docker-img/Ansible/Hosts/keys/id_ed25519_ansible
+    IdentitiesOnly yes
+    PreferredAuthentications publickey
+    Port 2224
+
+Host ssh1root
+    HostName 127.0.0.1
+    User root
+    IdentityFile /home/kali/Projects-git/DevSecOps-Docker-img/Ansible/Hosts/keys/id_ed25519_ansible
+    IdentitiesOnly yes
+    PreferredAuthentications publickey
+    Port 2222
+
+Host ssh2root
+    HostName 127.0.0.1
+    User root
+    IdentityFile /home/kali/Projects-git/DevSecOps-Docker-img/Ansible/Hosts/keys/id_ed25519_ansible
+    IdentitiesOnly yes
+    PreferredAuthentications publickey
+    Port 2223
+
+Host ssh3root
+    HostName 127.0.0.1
+    User root
+    IdentityFile /home/kali/Projects-git/DevSecOps-Docker-img/Ansible/Hosts/keys/id_ed25519_ansible
+    IdentitiesOnly yes
+    PreferredAuthentications publickey
+    Port 2224
