@@ -1,0 +1,35 @@
+---
+- name: Playbook
+  hosts: ssh2root
+  gather_facts: true
+
+  tasks:
+    - name: Create demo dir
+      ansible.builtin.file:
+        path: "{{ ansible_user_dir }}/demo/{{ item }}"
+        state: directory
+        mode: "0755"
+      loop:
+        - app
+        - logs
+        - data
+
+    - name: Set permision on dir
+      ansible.builtin.file:
+        path: "{{ ansible_user_dir }}/demo/{{ item }}"
+        state: directory
+        mode: "0755"
+      loop:
+        - app
+        - logs
+        - data
+      when: item == 'logs'
+
+    - name: Debuger directory
+      ansible.builtin.debug:
+        msg: "{{ item }}"
+      loop:
+        - app
+        - logs
+        - data
+      when: item == 'logs'

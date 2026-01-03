@@ -1,0 +1,67 @@
+---
+- name: Collect host metrics
+  hosts: all
+  gather_facts: true
+
+  vars:
+    metrics_local_root: "{{ playbook_dir }}/logs"
+
+  tasks:
+    - name: Capture uptime and load
+      ansible.builtin.command: /usr/bin/uptime
+      register: uptime_out
+      changed_when: false
+
+    - name: Capture memory usage
+      ansible.builtin.command: /usr/bin/free -h --si
+      register: mem_out
+      changed_when: false
+
+    - name: Capture disk usage
+      ansible.builtin.command: /bin/df -h -x tmpfs -x devtmpfs
+      register: disk_out
+      changed_when: false
+
+    - name: Capture listening sockets
+      ansible.builtin.command: /usr/bin/ss -tuln
+      register: sockets_out
+      changed_when: false
+
+    - name: Capture top CPU processes
+      ansible.builtin.command: /usr/bin/ps -eo pid,comm,%cpu,%mem --sort=-%cpu
+      register: ps_out
+      changed_when: false
+
+    - name: Ensure local metrics directory exists
+      ansible.builtin.file:
+        path: "{{ metrics_local_root }}/{{ inventory_hostname }}"
+        state: directory
+        mode: "0755"
+      delegate_to: localhost
+
+    - name: Save metrics snapshot on control host
+      ansible.builtin.copy:
+        dest: "{{ metrics_local_root }}/{{ inventory_hostname }}/metrics_{{ ansible_date_time.iso8601_basic_short }}.txt"
+        mode: "0644"
+        content: |
+          === Uptime and load ===
+          {{ uptime_out.stdout }}
+
+          === Memory ===
+          {{ mem_out.stdout }}
+
+          === Disk ===
+          {{ disk_out.stdout }}
+
+          === Listening sockets ===
+          {{ sockets_out.stdout }}
+
+          === Top processes (CPU sorted) ===
+          {{ (ps_out.stdout_lines | default([]))[:10] | join('\n') }}
+      delegate_to: localhost
+
+    - name: Show summary
+      ansible.builtin.debug:
+        msg:
+          - "Metrics saved to {{ metrics_local_root }}/{{ inventory_hostname }}"
+          - "{{ uptime_out.stdout }}"
