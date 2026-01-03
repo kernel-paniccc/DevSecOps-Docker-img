@@ -1,0 +1,50 @@
+  Переменные и фильтры:
+
+  Hello {{ user.name | default("guest") }}
+  Upper: {{ text | upper }}
+  Join: {{ list | join(", ") }}
+  Replace: {{ text | replace("foo", "bar") }}
+  Length: {{ items | length }}
+  To json: {{ obj | tojson }}
+
+  Условия:
+
+  {% if items %}
+  Items: {{ items | join(", ") }}
+  {% elif fallback %}
+  Using fallback
+  {% else %}
+  No data
+  {% endif %}
+
+  Циклы:
+
+  {% for host in hosts %}
+  - {{ loop.index }}: {{ host.name }} ({{ host.ip }})
+  {% endfor %}
+
+
+  Словари/поиск:
+
+  {{ mydict["key"] }}
+  {{ users | selectattr("enabled") | map(attribute="name") | list }}
+  {{ nums | select("even") | list }}
+  {{ items | reject("equalto", "skip") | list }}
+  
+  Set/локальные переменные:
+
+  {% set svc_port = app.port | default(8080) %}
+  Port: {{ svc_port }}
+
+  Тесты:
+
+  {% if value is defined %}
+  {% if items is iterable %}
+  {% if myvar is number %}
+
+  Блоки/наследование:
+
+  {% extends "base.j2" %}
+  {% block content %}
+    Body here
+  {% endblock %}

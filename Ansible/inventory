@@ -1,0 +1,9 @@
+[ssh_hosts]
+ssh1root
+ssh2root
+ssh3root
+
+[ssh_hosts:vars]
+ansible_user=root
+ansible_ssh_private_key_file=/home/kali/Projects-git/DevSecOps-Docker-img/Ansible/Hosts/keys/id_ed25519_ansible
+ansible_python_interpreter=/usr/bin/python3.10
