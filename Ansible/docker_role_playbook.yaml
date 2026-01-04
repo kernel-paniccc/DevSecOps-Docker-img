@@ -1,0 +1,9 @@
+---
+- name: Install docker
+  hosts: ssh1root
+  gather_facts: true
+  become: true
+
+  roles:
+    - name: docker-install
+      install_docker_compose: false
