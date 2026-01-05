@@ -8,7 +8,7 @@
 - `directory_playbook.yaml` — создаёт демо‑каталоги на хостах.
 - `Jinga2-demo/demo.j2` — пример Jinja2 шаблона.
 - `ansible.ctg` - пайплайны.
-- `Docker_role` - пример роли Ansible для раскатки Docker
+- `roles/docker-install` - пример роли Ansible для раскатки Docker
 
 #### Быстрый старт
 ```bash
