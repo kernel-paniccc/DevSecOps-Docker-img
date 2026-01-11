@@ -13,7 +13,7 @@ jobs:
         working-directory: CI/testApp
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         
       - name: reqs
         run: pip3 install -r requirements.txt
@@ -22,13 +22,22 @@ jobs:
         run: flake8 .
 
   test:
+    needs: [lint]
+    strategy:
+      matrix:
+        pyVersion: ['3.10', '3.12', '3.13']
+
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: CI/testApp
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "{{ matrix.pyVersion }}"
         
       - name: reqs
         run: pip3 install -r requirements.txt
