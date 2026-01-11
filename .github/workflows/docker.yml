@@ -26,3 +26,4 @@ jobs:
           file: CI/testApp/Dockerfile
           push: false
           tags: user/app:latest
+          
