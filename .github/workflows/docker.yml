@@ -6,7 +6,10 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest #self-hosted
+    defaults:
+      run:
+        working-directory: CI/testApp
     steps:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
