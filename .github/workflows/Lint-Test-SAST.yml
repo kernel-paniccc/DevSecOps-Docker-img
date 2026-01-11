@@ -1,8 +1,9 @@
 name: Analize
 
 on: 
-  push:
-    branches: [main, master]
+  #push:
+    #branches: [main, master]
+  pull_request:
 
 
 jobs:
