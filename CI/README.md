@@ -24,5 +24,5 @@ curl 'http://localhost:8080/echo?msg=hi'
 ```
 
 #### CI воркфлоу
-- `.github/workflows/Lint-Test-SAST.yml` — три джоба: flake8, pytest на Python 3.10/3.12/3.13, Semgrep с `--config auto`
-- `.github/workflows/docker.yml` — сборка Docker-образа из `CI/testApp/Dockerfile` через `docker/build-push-action`
+- `.github/workflows/Lint-Test-SAST.yml` — три джоба: flake8, pytest на Python 3.10/3.12/3.13, Semgrep с `--config auto`.
+- `.github/workflows/docker.yml` — checkout репо и сборка Docker-образа из `CI/testApp/Dockerfile` через `docker/build-push-action`.
