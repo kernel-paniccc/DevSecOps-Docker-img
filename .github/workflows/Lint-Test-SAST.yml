@@ -1,4 +1,4 @@
-name: Check
+name: Analize
 
 on: 
   push:

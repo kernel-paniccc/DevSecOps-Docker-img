@@ -4,3 +4,4 @@
 **/CI/testApp/.pytest_cache
 **/CI/testApp/__pycache__
 **/.pytest_cache
+**/actions-runner
