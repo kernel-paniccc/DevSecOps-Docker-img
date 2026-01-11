@@ -55,9 +55,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
       
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install Semgrep
+        run: pip install semgrep
+
       - name: Run Semgrep
-        uses: returntocorp/semgrep-action@v1
-        with: 
-          config: auto
-          args: >-
-            --include CI/testApp
+        run: semgrep --config auto .
