@@ -10,7 +10,6 @@ def client():
         yield client
 
 
-
 def test_index_returns_message(client):
     resp = client.get("/")
     assert resp.status_code == 200
