@@ -1,3 +1,5 @@
 **/Ansible/Hosts/keys/
 **/.ansible
 **/.vscode
+**/CI/testApp/.pytest_cache
+**/CI/testApp/__pycache__
