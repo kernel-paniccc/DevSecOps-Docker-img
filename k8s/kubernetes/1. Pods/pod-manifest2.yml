@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+  labels:
+    env: prod
+    app: main
+    tier: frontend
+    owner: Admin
+spec:
+  containers:
+    - name: containers-nginx
+      image: kerne1paniiccc/simple_app_for_test_devops 
+      ports:
+        - containerPort: 8000

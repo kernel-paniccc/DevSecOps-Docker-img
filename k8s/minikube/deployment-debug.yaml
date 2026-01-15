@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata:
+metadata: 
   name: myapp
-spec:
+spec: 
   replicas: 5
   selector:
     matchLabels:
       app: myapp
   template:
-    metadata:
+    metadata: 
       labels:
         app: myapp
     spec:
@@ -18,17 +18,17 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 8080
-        redinessProbe:
+        
+        readinessProbe:
           httpGet:
             path: /health
             port: 8080
           initialDelaySeconds: 1
-          pereodSeconds: 2
-        livenessProbe:
+          periodSeconds: 2
+        
+        livenessProbe: 
           httpGet:
             path: /health
             port: 8080
-          initialDelaySeconds: 1
-          pereodSeconds: 2
-
-
+          initialDelaySeconds:  1
+          periodSeconds: 2
