@@ -87,7 +87,7 @@ def echo(message: str = Query(..., min_length=1, max_length=200)):
 
 @app.get('/info')
 def info():
-    env_keys = ['ENV', 'STAGE', 'NODE_NAME']
+    env_keys = ['ENV', 'STAGE', 'NODE_NAME', 'PWD']
     return {
         'hostname': os.getenv('HOSTNAME', 'unknown'),
         'working_dir': os.getcwd(),

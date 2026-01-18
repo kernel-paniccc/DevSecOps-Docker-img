@@ -8,5 +8,4 @@
 - `Ansible/` — Ansible плейбуки
 - `simple-Docker/` — простые Docker шаблоны
 - `prometeus_stack/` — Шаблоны для monitoring стека (Grafana + Prometheus + Node-exporter).
-- `Terraform/localstack-demo/` — локальная песочница Terraform на LocalStack вместо AWS.
 - More in future
