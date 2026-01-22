@@ -1,0 +1,36 @@
+---
+- name: Master
+  hosts: master
+  gather_facts: true
+  become: true
+
+  tasks:
+
+    - name: Update system
+      ansible.builtin.apt:
+        update_cache: true
+        upgrade: dist
+
+    - name: Install utils
+      ansible.builtin.apt:
+        name:
+          - curl
+          - docker.io
+        update_cache: true
+
+    - name: Install k3s
+      ansible.builtin.shell:
+        cmd: curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
+      changed_when: false
+
+    - name: Wait for k3s to be ready
+      ansible.builtin.command: kubectl get nodes
+      register: nodes_out
+      retries: 10
+      delay: 5
+      until: nodes_out.rc == 0
+      changed_when: false
+
+    - name: Show nodes
+      ansible.builtin.debug:
+        msg: "{{ nodes_out.stdout }}"
