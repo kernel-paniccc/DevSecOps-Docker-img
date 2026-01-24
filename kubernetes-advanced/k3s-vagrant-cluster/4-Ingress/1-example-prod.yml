@@ -1,0 +1,141 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app-deploy
+  labels:
+    app: my-k3s-prod
+    env: prod
+    owner: admin
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      project: demo
+      tier: app
+  template:
+    metadata:
+      labels:
+        project: demo # pods labels !!!!!!
+        tier: app
+    spec:
+      containers:
+      - name: containers-prod
+        image: kerne1paniiccc/simple_app_for_test_devops:latest
+        ports:
+          - name: app
+            containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app-svc
+  labels:
+    app: my-k3s-prod
+    env: prod
+    owner: admin
+spec:
+  type: ClusterIP
+  selector:
+    project: demo # pods labels !!!!!!
+    tier: app
+  ports:
+  - name: app
+    protocol: TCP
+    port: 1001
+    targetPort: app
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-nginx-deploy
+  labels:
+    app: my-k3s-prod
+    env: prod
+    owner: admin
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      project: demo
+      tier: nginx
+  template:
+    metadata:
+      labels:
+        project: demo # pods labels !!!!!!
+        tier: nginx
+    spec:
+      containers:
+      - name: proxy-ng
+        image: nginx:trixie-perl
+        ports:
+          - name: nginx
+            containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-nginx-svc
+  labels:
+    app: my-k3s-prod
+    env: prod
+    owner: admin
+spec:
+  type: ClusterIP
+  selector:
+    project: demo # pods labels !!!!!!
+    tier: nginx
+  ports:
+  - name: nginx
+    protocol: TCP
+    port: 1002
+    targetPort: nginx
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-tomcat-deploy
+  labels:
+    app: my-k3s-prod
+    env: prod
+    owner: admin
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      project: demo
+      tier: tomcat
+  template:
+    metadata:
+      labels:
+        project: demo # pods labels !!!!!!
+        tier: tomcat
+    spec:
+      containers:
+      - name: tomcat
+        image: tomcat:9.0
+        ports:
+          - name: tomcat
+            containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-tomcat-svc
+  labels:
+    app: my-k3s-prod
+    env: prod
+    owner: admin
+spec:
+  type: ClusterIP
+  selector:
+    project: demo # pods labels !!!!!!
+    tier: tomcat
+  ports:
+  - name: tomcat
+    protocol: TCP
+    port: 1003
+    targetPort: tomcat
