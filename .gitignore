@@ -5,5 +5,3 @@
 **/CI/testApp/__pycache__
 **/.pytest_cache
 **/actions-runner
-**/k8s/kubernetes/Vagrant-cluster/ansible/group_vars
-**/k8s/kubernetes/Vagrant-cluster/.vagrant

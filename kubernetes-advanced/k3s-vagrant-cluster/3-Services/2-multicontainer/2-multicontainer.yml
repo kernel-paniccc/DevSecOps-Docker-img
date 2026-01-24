@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-web-deployment-multi
+  labels:
+    app: my-k3s-prod
+    env: prod
+    owner: admin
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      project: demo
+  template:
+    metadata:
+      labels:
+        project: demo # pods labels !!!!!!
+    spec:
+      volumes:
+        - name: nginx-conf
+          configMap:
+            name: my-nginx-conf
+      containers:
+      - name: containers-prod
+        image: kerne1paniiccc/simple_app_for_test_devops:latest
+        ports:
+          - name: app
+            containerPort: 8000
+      - name: proxy-ng
+        image: nginx:trixie-perl
+        ports:
+          - name: nginx
+            containerPort: 8080
+        volumeMounts:
+          - name: nginx-conf
+            mountPath: /etc/nginx/conf.d/default.conf
+            subPath: default.conf
+          - name: nginx-conf
+            mountPath: /usr/share/nginx/html/index.html
+            subPath: index.html
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service-multi
+  labels:
+    app: my-k3s-prod
+    env: prod
+    owner: admin
+spec:
+  type: LoadBalancer
+  selector:
+    project: demo # pods labels !!!!!!
+  ports:
+  - name: listener
+    protocol: TCP
+    port: 8000
+    targetPort: app
+
+  - name: proxy
+    protocol: TCP
+    port: 4321
+    targetPort: nginx
