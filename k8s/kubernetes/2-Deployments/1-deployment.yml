@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: my-web-deployment
+  labele:
+    app: my-k3s-prod
+spec:
+  selectors:
+    matchLabels:
+      project: demo-k3s
+  template:
+    metadata:
+      labels:
+        project: demo-k3s
+    spec:
+      containers:
+      - name: containers-prod
+        image: kerne1paniiccc/simple_app_for_test_devops:latest
+        ports:
+          - containerPort: 8000

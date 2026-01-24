@@ -6,7 +6,7 @@ Vagrant.configure("2") do |config|
       m.vm.network "private_network", ip: "192.168.56.10"
       m.vm.provider :libvirt do |v|
         v.cpus = 2
-        v.memory = 2560
+        v.memory = 1024
       end
     end
 
@@ -15,7 +15,7 @@ Vagrant.configure("2") do |config|
       w.vm.network "private_network", ip: "192.168.56.11"
       w.vm.provider :libvirt do |v|
         v.cpus = 2
-        v.memory = 2048
+        v.memory = 1024
       end
     end
   end

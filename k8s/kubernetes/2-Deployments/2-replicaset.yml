@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: my-web-deployment-replicaset
+  labele:
+    app: my-k3s-prod
+    env: prod
+    owner: admin
+spec:
+  replicas: 3
+  selectors:
+    matchLabels:
+      project: demo-rst
+  template:
+    metadata:
+      labels:
+        project: demo-rst
+    spec:
+      containers:
+      - name: containers-prod
+        image: kerne1paniiccc/simple_app_for_test_devops:latest
+        ports:
+          - containerPort: 8000
