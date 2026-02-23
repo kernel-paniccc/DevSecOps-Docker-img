@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: {{ .Release.Name }}-deployment-replicaset
+  labels:
+    app: {{ .Release.Name }}-prod
+    env: prod
+    owner: admin
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      project: demo-rst
+  template:
+    metadata:
+      labels:
+        project: demo-rst
+    spec:
+      containers:
+      - name: containers-prod
+        image: {{ .Values.container.image }}
+        ports:
+          - containerPort: {{ .Values.container.port }}

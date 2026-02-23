@@ -1,0 +1,7 @@
+
+
+container:
+  image: kerne1paniiccc/simple_app_for_test_devops:latest
+  port: 8000
+
+replicaCount: 3

@@ -1,0 +1,16 @@
+apiVersion: v2
+name: HelmChart
+description: Simple HelmChart
+type: application
+version: 0.1.0
+appVersion: "0.0.1"
+
+keywords:
+  - docker
+  - HelmChart
+  - devops my-k3s-prod
+
+maintainers:
+  - name: kernel
+    email: test@mail.com
+    url: exemple.com
