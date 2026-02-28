@@ -5,6 +5,6 @@ metadata:
 spec:
   containers:
     - name: containers-nginx
-      image: kerne1paniiccc/simple_app_for_test_devops 
+      image: kerne1paniiccc/simple_app_for_test_devops:latest
       ports:
         - containerPort: 8000

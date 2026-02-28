@@ -22,6 +22,45 @@
       ansible.builtin.shell:
         cmd: curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
       changed_when: false
+    - name: Enable IPv4 forwarding
+      ansible.posix.sysctl:
+        name: net.ipv4.ip_forward
+        value: "1"
+        state: present
+        reload: true
+
+    - name: Allow forwarding policy
+      ansible.builtin.iptables:
+        chain: FORWARD
+        policy: ACCEPT
+
+    - name: Allow host network to pod network forwarding
+      ansible.builtin.iptables:
+        chain: FORWARD
+        source: 192.168.56.0/24
+        destination: 10.42.0.0/16
+        jump: ACCEPT
+
+    - name: Allow host network to service network forwarding
+      ansible.builtin.iptables:
+        chain: FORWARD
+        source: 192.168.56.0/24
+        destination: 10.43.0.0/16
+        jump: ACCEPT
+
+    - name: Allow pod network to host network forwarding
+      ansible.builtin.iptables:
+        chain: FORWARD
+        source: 10.42.0.0/16
+        destination: 192.168.56.0/24
+        jump: ACCEPT
+
+    - name: Allow service network to host network forwarding
+      ansible.builtin.iptables:
+        chain: FORWARD
+        source: 10.43.0.0/16
+        destination: 192.168.56.0/24
+        jump: ACCEPT
 
     - name: Read k3s node token
       ansible.builtin.slurp:

@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: demo-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/kernel-paniccc/DevSecOps-Docker-img.git
+    targetRevision: HEAD
+    path: kubernetes-advanced/k3s-vagrant-cluster/6-ArgoCD/demo-app
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: demo
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
