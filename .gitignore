@@ -5,3 +5,7 @@
 **/CI/testApp/__pycache__
 **/.pytest_cache
 **/actions-runner
+*/home/kali/Projects-git/DevSecOps-Docker-img/ELK/configs/kibana/.env
+**/.env
+**/.env.*
+**/*.env
